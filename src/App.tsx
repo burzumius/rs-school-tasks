@@ -32,20 +32,17 @@ export default class App extends Component {
 		fetchItems().then((data = []) => {
 			const searchResults = data.filter(
 				(item) =>
-					//search by name OR location name
 					item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 					item.location.name.toLowerCase().includes(searchQuery.toLowerCase())
 			);
 
 			this.setState({
-				//if no matches - returns all items
 				items: searchResults?.length ? searchResults : data,
 				isLoading: false,
 			});
 		});
 	};
 
-	//when App component mounts - fetching items from server
 	componentDidMount(): void {
 		this.setState({ isLoading: true });
 

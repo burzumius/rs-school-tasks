@@ -15,7 +15,6 @@ export default class SearchBar extends Component<SearchBarProps> {
 		searchQuery: this.localStorageValue || '',
 	};
 
-	//search input change hadndler
 	handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 
@@ -23,7 +22,6 @@ export default class SearchBar extends Component<SearchBarProps> {
 			searchQuery: value,
 		});
 
-		//add search query to localStorage
 		if (value.trim()) {
 			localStorage.setItem('searchQuery', value.trim());
 		}
