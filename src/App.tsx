@@ -65,6 +65,7 @@ export default class App extends Component {
 				<div className={style.wrapper}>
 					<div className={style.topSection}>
 						<SearchBar handleSearch={this.handleSearch} />
+
 						<Button
 							text='throw error'
 							onClick={this.handleErrorButtonClick}
