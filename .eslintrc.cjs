@@ -9,6 +9,18 @@ module.exports = {
 	],
 	ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules', 'public'],
 	parser: '@typescript-eslint/parser',
+	parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+	settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 	plugins: ['react-refresh', 'react-compiler', 'prettier'],
 	rules: {
 		'react-refresh/only-export-components': [
