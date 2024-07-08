@@ -15,6 +15,8 @@ interface IAppState {
 }
 
 export default class App extends Component {
+	localStorageValue = localStorage.getItem('searchQuery');
+
 	state: IAppState = {
 		items: [],
 		isLoading: false,
@@ -46,12 +48,16 @@ export default class App extends Component {
 	componentDidMount(): void {
 		this.setState({ isLoading: true });
 
-		fetchItems().then((data) => {
-			this.setState({
-				items: data,
-				isLoading: false,
+		if (this.localStorageValue) {
+			this.handleSearch(this.localStorageValue);
+		} else {
+			fetchItems().then((data) => {
+				this.setState({
+					items: data,
+					isLoading: false,
+				});
 			});
-		});
+		}
 	}
 
 	render() {
