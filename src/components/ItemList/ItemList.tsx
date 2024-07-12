@@ -16,11 +16,11 @@ export default class ItemList extends Component<ItemListProps> {
 
 		return (
 			<section className={style.itemListContainer}>
-				<ol className={style.itemList}>
+				<ul className={style.itemList}>
 					{items.map((item) => {
 						return <Item item={item} key={item.uid} />;
 					})}
-				</ol>
+				</ul>
 			</section>
 		);
 	}

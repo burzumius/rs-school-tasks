@@ -1,5 +1,7 @@
 import { IAstroObject } from '../../../../helpers/types';
 
+import style from './Item.module.scss';
+
 interface ItemProps {
 	item: IAstroObject;
 }
@@ -11,10 +13,17 @@ export default class Item extends Component<ItemProps> {
 		const { item } = this.props;
 
 		return (
-			<li>
-				<h2>{item.name}</h2>
+			<li className={style.item}>
+				<h2 className={style.name}>{item.name}</h2>
 				<p>
-					<b>location:</b> {item.location?.name}
+					type: <b>{item.astronomicalObjectType?.replace(/_/g, ' ')}</b>
+				</p>
+				<p className={style.location}>
+					{item.location && (
+						<>
+							location: <b>{item.location?.name}</b>
+						</>
+					)}
 				</p>
 			</li>
 		);

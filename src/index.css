@@ -16,11 +16,10 @@
 }
 
 html {
-	position: relative;
 	box-sizing: border-box;
 	background:
-		linear-gradient(rgba(42, 42, 42, 0.428), rgba(0, 0, 0, 0.519)),
-		url(./assets/bg-image.webp) center no-repeat;
+	linear-gradient(rgba(0, 0, 0, 0.281), rgba(0, 0, 0, 0.356)),
+	url(./assets/bg-image.webp) center no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
 }

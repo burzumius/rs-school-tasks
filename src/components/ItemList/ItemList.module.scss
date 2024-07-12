@@ -1,9 +1,13 @@
 .itemListContainer {
-	width: 100%;
 	display: flex;
-	justify-content: center;
 
 	.itemList {
+		display: flex;
 		padding: 0;
+		list-style: none;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 20px;
 	}
 }
