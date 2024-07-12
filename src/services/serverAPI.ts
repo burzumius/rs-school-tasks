@@ -2,15 +2,10 @@ import { IAstroObject } from '../helpers/types';
 
 const baseUrl = 'https://stapi.co/api/v1/rest';
 
-const delay = (amount: number) =>
-	new Promise((resolve) => setTimeout(resolve, amount));
-
 const fetchItems = async () => {
 	try {
-		await delay(2000);
-
 		const response = await fetch(
-			`${baseUrl}/astronomicalObject/search?pageNumber=1&pageSize=20`
+			`${baseUrl}/astronomicalobject/search?pageNumber=1&pageSize=20`
 		);
 
 		if (!response.ok) {

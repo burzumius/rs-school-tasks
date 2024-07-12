@@ -1,5 +1,3 @@
-import { Component } from 'react';
-
 import style from './Button.module.scss';
 import classNames from 'classnames';
 
@@ -10,16 +8,14 @@ interface ButtonProps {
 	className?: string;
 }
 
-export default class Button extends Component<ButtonProps> {
-	render() {
-		const { text, type = 'button', onClick, className } = this.props;
+const Button: React.FC<ButtonProps> = ({ text, type, onClick, className }) => {
+	const buttonClasses = classNames(style.button, className);
 
-		const buttonClasses = classNames(style.button, className);
+	return (
+		<button type={type} className={buttonClasses} onClick={onClick}>
+			{text}
+		</button>
+	);
+};
 
-		return (
-			<button type={type} className={buttonClasses} onClick={onClick}>
-				{text}
-			</button>
-		);
-	}
-}
+export default Button;

@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import style from './App.module.scss';
 import SearchBar from './components/SearchBar/SearchBar';
 import ItemList from './components/ItemList/ItemList';
@@ -39,7 +38,7 @@ export default class App extends Component {
 			);
 
 			this.setState({
-				items: searchResults?.length ? searchResults : data,
+				items: searchResults,
 				isLoading: false,
 			});
 		});
@@ -71,12 +70,6 @@ export default class App extends Component {
 				<div className={style.wrapper}>
 					<div className={style.topSection}>
 						<SearchBar handleSearch={this.handleSearch} />
-
-						<Button
-							text='throw error'
-							onClick={this.handleErrorButtonClick}
-							className={style.errorButton}
-						/>
 					</div>
 
 					<div className={style.appContent}>
