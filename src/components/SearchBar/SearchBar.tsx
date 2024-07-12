@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import style from './SearchBar.module.scss';
 
 import Input from '../Input/Input';
@@ -6,6 +7,7 @@ import Button from '../Button/Button';
 
 interface SearchBarProps {
 	handleSearch: (searchQuery: string) => void;
+	isLoading: boolean;
 }
 
 export default class SearchBar extends Component<SearchBarProps> {
@@ -27,7 +29,6 @@ export default class SearchBar extends Component<SearchBarProps> {
 		}
 	};
 
-	//search on enter
 	handleKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === 'Enter') {
 			this.props.handleSearch(this.state.searchQuery.trim());
@@ -35,7 +36,7 @@ export default class SearchBar extends Component<SearchBarProps> {
 	};
 	render() {
 		const { searchQuery } = this.state;
-		const { handleSearch } = this.props;
+		const { handleSearch, isLoading } = this.props;
 
 		return (
 			<section
@@ -43,7 +44,7 @@ export default class SearchBar extends Component<SearchBarProps> {
 				onKeyDown={this.handleKeyDown}
 			>
 				<Input
-					placeholderText='Type name or location here...'
+					placeholderText='Type name...'
 					inputClassName={style.input}
 					value={searchQuery}
 					onChange={this.handleInputChange}
@@ -52,6 +53,7 @@ export default class SearchBar extends Component<SearchBarProps> {
 					text='search'
 					className={style.button}
 					onClick={() => handleSearch(searchQuery.trim())}
+					disabled={isLoading}
 				/>
 			</section>
 		);

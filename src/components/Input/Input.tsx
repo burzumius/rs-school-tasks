@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import style from './Input.module.scss';
 
 import classNames from 'classnames';

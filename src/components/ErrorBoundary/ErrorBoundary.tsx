@@ -1,5 +1,7 @@
 import React, { Component, ErrorInfo } from 'react';
+
 import style from './ErrorBoundary.module.scss';
+
 import Button from '../Button/Button';
 
 interface Props {

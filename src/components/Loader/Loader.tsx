@@ -1,7 +1,8 @@
 import { Component } from 'react';
 
-import { TbGalaxy } from 'react-icons/tb';
 import style from './Loader.module.scss';
+
+import { TbGalaxy } from 'react-icons/tb';
 
 export default class Loader extends Component {
 	render(): React.ReactNode {

@@ -1,20 +1,32 @@
 import { IAstroObject } from '../helpers/types';
 
-const baseUrl = 'https://stapi.co/api/v1/rest';
+const url = 'https://stapi.co/api/v1/rest/astronomicalObject/search';
 
-const delay = (amount: number) =>
-	new Promise((resolve) => setTimeout(resolve, amount));
+interface IConfig {
+	method: string;
+	headers: {
+		'Content-Type': string;
+	};
+	body?: string;
+}
 
-const fetchItems = async () => {
+const fetchItems = async (searchTerm?: string) => {
+	const config: IConfig = {
+		method: searchTerm ? 'POST' : 'GET',
+		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+	};
+
+	if (searchTerm) {
+		const params = new URLSearchParams();
+		params.append('name', searchTerm);
+		config.body = params.toString();
+	}
+
 	try {
-		await delay(2000);
-
-		const response = await fetch(
-			`${baseUrl}/astronomicalObject/search?pageNumber=1&pageSize=20`
-		);
+		const response = await fetch(url, config);
 
 		if (!response.ok) {
-			throw new Error('failed to fetch');
+			throw new Error(`Response status: ${response.status}`);
 		}
 
 		const data = await response.json();
