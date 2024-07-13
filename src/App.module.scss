@@ -1,0 +1,33 @@
+.appContainer {
+	padding-top: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+
+	.topSection { 
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		align-self: center;
+		width: 100%;
+		margin-bottom: 40px;
+		gap: 20px;
+
+		.errorButton {
+			max-width: 150px;
+			width: 100%;
+			height: 40px;
+		}
+	}
+}
+
+
+@media screen and (max-width: 800px) {
+	.appContainer {
+
+		.topSection {
+			flex-wrap: wrap;
+		}
+	}
+}

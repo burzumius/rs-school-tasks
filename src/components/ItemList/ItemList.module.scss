@@ -1,0 +1,14 @@
+.itemListContainer {
+	display: flex;
+	justify-content: center;
+
+	.itemList {
+		display: flex;
+		list-style: none;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 20px;
+		padding: 0;
+	}
+}
