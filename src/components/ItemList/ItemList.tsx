@@ -1,7 +1,8 @@
 import style from './ItemList.module.scss';
 
-import { IAstroObject } from '../../helpers/types';
 import Item from './components/Item/Item';
+
+import { IAstroObject } from '../../helpers/types';
 
 interface ItemListProps {
 	items: IAstroObject[];

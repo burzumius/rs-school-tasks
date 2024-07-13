@@ -6,6 +6,7 @@ import Button from '../Button/Button';
 
 interface SearchBarProps {
 	handleSearch: (searchQuery: string) => void;
+	isLoading: boolean;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {

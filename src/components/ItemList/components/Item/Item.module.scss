@@ -1,2 +1,9 @@
 .item {
+  width: 400px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.337);
+  backdrop-filter: blur(90px);
+  padding: 20px;
+  box-shadow: rgb(45, 38, 77) 0px 20px 30px -10px;
 }

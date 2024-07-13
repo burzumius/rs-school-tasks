@@ -1,4 +1,5 @@
 import style from './Button.module.scss';
+
 import classNames from 'classnames';
 
 interface ButtonProps {
@@ -6,6 +7,7 @@ interface ButtonProps {
 	type?: 'button' | 'submit' | 'reset';
 	onClick?: () => void;
 	className?: string;
+	disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({ text, type, onClick, className }) => {
