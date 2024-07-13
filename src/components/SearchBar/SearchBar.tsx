@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './SearchBar.module.scss';
+
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -10,39 +12,24 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
-	const localStorageValue = localStorage.getItem('searchQuery');
-	const [searchQuery, setSearchQuery] = useState(localStorageValue || '');
+	const [searchQuery, setSearchQuery] = useLocalStorage('searchQuery', '');
+	const [inputValue, setInputValue] = useState(searchQuery);
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value;
-
-		setSearchQuery(value);
-
-		if (value.trim()) {
-			localStorage.setItem('searchQuery', value.trim());
-		}
-	};
-
-	const handleKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === 'Enter') {
-			handleSearch(searchQuery.trim());
-		}
+	const handleSubmit = () => {
+		handleSearch(inputValue);
+		setSearchQuery(inputValue);
 	};
 
 	return (
-		<section className={style.searchBarContainer} onKeyDown={handleKeyDown}>
+		<form className={style.searchBarContainer} onSubmit={handleSubmit}>
 			<Input
-				placeholderText='Type name or location here...'
+				placeholderText='Type object name here...'
 				inputClassName={style.input}
-				value={searchQuery}
-				onChange={handleInputChange}
+				value={inputValue}
+				onChange={(e) => setInputValue(e.target.value)}
 			/>
-			<Button
-				text='search'
-				className={style.button}
-				onClick={() => handleSearch(searchQuery.trim())}
-			/>
-		</section>
+			<Button text='search' className={style.button} />
+		</form>
 	);
 };
 

@@ -9,8 +9,8 @@ interface InputProps {
 	labelText?: string;
 	inputClassName?: string;
 	labelClassName?: string;
-	value: string;
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	value?: string;
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 const Input: React.FC<InputProps> = ({
 	name,
