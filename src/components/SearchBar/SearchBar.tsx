@@ -44,7 +44,7 @@ export default class SearchBar extends Component<SearchBarProps> {
 				onKeyDown={this.handleKeyDown}
 			>
 				<Input
-					placeholderText='Type name...'
+					placeholderText='Type name here...'
 					inputClassName={style.input}
 					value={searchQuery}
 					onChange={this.handleInputChange}

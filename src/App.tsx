@@ -78,19 +78,17 @@ export default class App extends Component {
 
 		return (
 			<main className={style.appContainer}>
-				<div className={style.wrapper}>
-					<div className={style.topSection}>
-						<SearchBar handleSearch={this.handleSearch} isLoading={isLoading} />
+				<div className={style.topSection}>
+					<SearchBar handleSearch={this.handleSearch} isLoading={isLoading} />
 
-						<Button
-							text='throw error'
-							onClick={this.handleErrorButtonClick}
-							className={style.errorButton}
-						/>
-					</div>
-
-					<div className={style.appContent}>{appContent}</div>
+					<Button
+						text='throw error'
+						onClick={this.handleErrorButtonClick}
+						className={style.errorButton}
+					/>
 				</div>
+
+				<div className={style.appContent}>{appContent}</div>
 			</main>
 		);
 	}
