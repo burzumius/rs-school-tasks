@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import style from './SearchBar.module.scss';
 
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useLocalStorage from '../../helpers/hooks/useLocalStorage';
 
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -12,12 +12,13 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
-	const [searchQuery, setSearchQuery] = useLocalStorage('searchQuery', '');
+	const [searchQuery] = useLocalStorage('searchQuery');
 	const [inputValue, setInputValue] = useState(searchQuery);
 
-	const handleSubmit = () => {
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+
 		handleSearch(inputValue);
-		setSearchQuery(inputValue);
 	};
 
 	return (
@@ -28,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
 				value={inputValue}
 				onChange={(e) => setInputValue(e.target.value)}
 			/>
-			<Button text='search' className={style.button} />
+			<Button text='search' className={style.button} type='submit' />
 		</form>
 	);
 };

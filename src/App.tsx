@@ -1,34 +1,41 @@
-import { useEffect, useState } from 'react';
-
+import { Outlet, useLocation } from 'react-router-dom';
 import style from './App.module.scss';
 
-import SearchBar from './components/SearchBar/SearchBar';
+import Sidebar from './components/Sidebar/Sidebar';
+import { IAstroObjects } from './helpers/types';
+import useLocalStorage from './helpers/hooks/useLocalStorage';
+import { useState, useCallback, useEffect } from 'react';
 import ItemList from './components/ItemList/ItemList';
 import Loader from './components/Loader/Loader';
-
-import { IAstroObject } from './helpers/types';
+import SearchBar from './components/SearchBar/SearchBar';
 import { fetchItems } from './services/serverAPI';
-import useLocalStorage from './hooks/useLocalStorage';
 
 const App = () => {
-	const [items, setItems] = useState<IAstroObject[]>([]);
+	const [items, setItems] = useState<IAstroObjects[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [lSSearchQuery] = useLocalStorage('searchQuery');
+	const [lSSearchQuery, setLSSearchQuery] = useLocalStorage('searchQuery');
+	const location = useLocation();
 
-	const handleSearch = async (searchQuery?: string) => {
-		setIsLoading(true);
+	const handleSearch = useCallback(
+		async (searchQuery?: string) => {
+			setIsLoading(true);
 
-		try {
-			const data = await fetchItems(searchQuery);
-			if (data) {
-				setItems(data);
+			setLSSearchQuery(searchQuery);
+
+			try {
+				const data = await fetchItems(searchQuery);
+
+				if (data) {
+					setItems(data);
+				}
+			} catch (e) {
+				console.error(e);
+			} finally {
+				setIsLoading(false);
 			}
-		} catch (e) {
-			console.error(e);
-		} finally {
-			setIsLoading(false);
-		}
-	};
+		},
+		[setLSSearchQuery]
+	);
 
 	useEffect(() => {
 		if (lSSearchQuery) {
@@ -36,7 +43,7 @@ const App = () => {
 		} else {
 			handleSearch();
 		}
-	}, [lSSearchQuery]);
+	}, [handleSearch, lSSearchQuery]);
 
 	let appContent;
 
@@ -47,15 +54,17 @@ const App = () => {
 	} else {
 		appContent = <h2>Object '{lSSearchQuery}' not found</h2>;
 	}
-
 	return (
-		<main className={style.appContainer}>
-			<div className={style.topSection}>
-				<SearchBar handleSearch={handleSearch} isLoading={isLoading} />
-			</div>
-
-			<div className={style.appContent}>{appContent}</div>
-		</main>
+		<>
+			{location.pathname === '/' ? (
+				<div className={style.appContainer}>
+					<SearchBar isLoading={isLoading} handleSearch={handleSearch} />
+					<div>{appContent}</div>
+				</div>
+			) : (
+				<Outlet />
+			)}
+		</>
 	);
 };
 

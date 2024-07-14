@@ -1,4 +1,4 @@
-export interface IAstroObject {
+export interface IAstroObjects {
 	uid: string;
 	name: string;
 	astronomicalObjectType: AstroObjectTypes;
@@ -38,4 +38,20 @@ enum AstroObjectTypes {
 	STAR_SYSTEM = 'STAR_SYSTEM',
 	SECTOR = 'SECTOR',
 	REGION = 'REGION',
+}
+
+export interface IAstroObject {
+	uid: string;
+	name: string;
+	astronomicalObjectType: AstroObjectTypes;
+	location: {
+		uid: string;
+		name: string;
+		astronomicalObjectType: AstroObjectTypes;
+		location: {
+			uid: string;
+			name: string;
+		};
+	};
+	astronomicalObjects: [];
 }

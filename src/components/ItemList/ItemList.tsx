@@ -1,11 +1,10 @@
 import style from './ItemList.module.scss';
 
-import Item from './components/Item/Item';
-
-import { IAstroObject } from '../../helpers/types';
+import { IAstroObjects } from '../../helpers/types';
+import { NavLink } from 'react-router-dom';
 
 interface ItemListProps {
-	items: IAstroObject[];
+	items: IAstroObjects[];
 }
 
 const ItemList: React.FC<ItemListProps> = ({ items }) => {
@@ -13,7 +12,18 @@ const ItemList: React.FC<ItemListProps> = ({ items }) => {
 		<section className={style.itemListContainer}>
 			<ol className={style.itemList}>
 				{items.map((item) => {
-					return <Item item={item} key={item.uid} />;
+					return (
+						<li key={item.uid}>
+							<NavLink
+								to={`/items/${item.uid}`}
+								className={({ isActive }) =>
+									`${style.link} ${isActive ? style.active : ''}`
+								}
+							>
+								<h3 className={style.itemName}>{item.name}</h3>
+							</NavLink>
+						</li>
+					);
 				})}
 			</ol>
 		</section>

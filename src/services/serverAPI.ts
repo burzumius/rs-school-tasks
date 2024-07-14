@@ -1,6 +1,6 @@
-import { IAstroObject } from '../helpers/types';
+import { IAstroObject, IAstroObjects } from '../helpers/types';
 
-const url = 'https://stapi.co/api/v1/rest/astronomicalObject/search';
+const baseUrl = 'https://stapi.co/api/v1/rest/astronomicalObject';
 
 interface IConfig {
 	method: string;
@@ -23,7 +23,7 @@ const fetchItems = async (searchTerm?: string) => {
 	}
 
 	try {
-		const response = await fetch(url, config);
+		const response = await fetch(`${baseUrl}/search`, config);
 
 		if (!response.ok) {
 			throw new Error(`Response status: ${response.status}`);
@@ -31,10 +31,27 @@ const fetchItems = async (searchTerm?: string) => {
 
 		const data = await response.json();
 
-		return data.astronomicalObjects as IAstroObject[];
+		return data.astronomicalObjects as IAstroObjects[];
 	} catch (e) {
 		console.error(e);
 	}
 };
 
-export { fetchItems };
+const getItem = async (itemId: string) => {
+	try {
+		const response = await fetch(`${baseUrl}?uid=${itemId}`);
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch');
+		}
+
+		const data = await response.json();
+		console.log(data);
+
+		return data.astronomicalObject as IAstroObject;
+	} catch (e) {
+		console.error(e);
+	}
+};
+
+export { fetchItems, getItem };
