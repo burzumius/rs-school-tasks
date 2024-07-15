@@ -1,0 +1,16 @@
+.loader {
+	top: 44%;
+	left: 46%;
+	animation: loading 1.5s linear infinite;
+	transform: rotateX(75deg) rotateY(-15deg);
+	position: fixed;
+}
+
+@keyframes loading {
+	0% {
+		transform: rotateX(70deg) rotateY(-15deg) rotate(0deg);
+	}
+	100% {
+		transform: rotateX(70deg) rotateY(-15deg) rotate(360deg);
+	}
+}
